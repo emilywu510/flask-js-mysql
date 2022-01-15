@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+        <meta charset="utf-8"/>
+        <title>WEEK3-2作業</title>
+        <link rel="stylesheet" type="text/css" href="week1.css" />
+       
+    <body>
+        <div class="frame">
+            <div class="left">My Website</div>
+            <div class="right">
+                <div class="item">Item 1</div>
+                <div class="item">Item 2</div>
+                <div class="item">Item 3</div>
+                <div class="item">Item 4</div>
+                <img class="hamburger" src="hamburger.png">
+            </div>
+        </div>
+        <div class="welcome">
+            <div class="text">Welcome to My Home</div>
+        </div>
+        <div class="view">
+            <div class="view-content">
+                <img  class="pic"></img>
+                <p  class="pic-text"></p>
+            </div>
+            <div class="view-content">
+                <img class="pic"></img>
+                <p  class="pic-text"></p>
+            </div>
+            <div class="view-content">
+                <img class="pic" ></img>
+                <p  class="pic-text"></p>
+            </div>
+            <div class="view-content">
+                <img class="pic"></img>
+                <p class="pic-text"></p>
+            </div>
+        </div>
+        <div class="view">
+            <div class="view-content">
+                <img class="pic"></img>
+                <p  class="pic-text"></p>
+            </div>
+            <div class="view-content">
+                <img class="pic" ></img>
+                <p  class="pic-text"></p>
+            </div>
+            <div class="view-content">
+                <img class="pic"></img>
+                <p  class="pic-text"></p>
+            </div>
+            <div class="view-content">
+                <img class="pic" ></img>
+                <p  class="pic-text"></p>
+            </div>
+        </div>
+        <script type="text/javascript">
+            let dataUrl= "https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assignment.json"
+            let xhr = new XMLHttpRequest()
+            xhr.open('GET',dataUrl, true)
+            xhr.send()
+            xhr.onload = function(){
+                let data = JSON.parse(this.responseText);
+                for (n=0;n<8;n++){
+                    let element = document.querySelectorAll(".pic")[n];
+                    let clist_img = document.createElement("img");
+                    document.querySelectorAll(".pic")[n].src= "https"+data.result.results[n].file.split("https")[1] ;
+                    element.appendChild(clist_img);                           
+                }
+                for (n=0;n<8;n++){
+                    let el = document.querySelectorAll('.pic-text')[n];
+                    let str = document.createElement("div");
+                    str.textContent = data.result.results[n].stitle;
+                    el.appendChild(str);
+                }
+            }
+                    </script>
+    </body>
+</html>
