@@ -30,7 +30,6 @@ password 欄位必須是 test。接著繼續新增至少 4 筆隨意的資料。
 <img width="776" alt="cmd_uTEBQLRPWi" src="https://user-images.githubusercontent.com/93464862/151172406-402e37fa-aa95-4b9a-8319-81d851f928fd.png">
 
 
-要求五
 
 ● 在資料庫中，建立新資料表，取名字為message。資料表中欄位設定如下，並新增資料：
 
