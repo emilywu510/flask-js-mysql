@@ -24,7 +24,7 @@ def home():
 @app.route("/member")
 def success():
     if "username_input" in session:
-        return render_template("success.html", name=session["name_input"])
+        return render_template("success.html", name=session["name"])
     else:
         return redirect("/")
 
@@ -51,7 +51,6 @@ def register():
     elif name_input =="" or username_input == "" or password_input== "":
         return redirect("/error?message=請輸入姓名、帳號、密碼")
     else:
-        session["name_input"] = name_input
         cursor.execute("INSERT INTO member (name, username, password) VALUES (%s,%s,%s)", (name_input, username_input, password_input))
         db.commit()
         return redirect ("/")
@@ -62,11 +61,12 @@ def signin():
     username_input = request.form["username"]
     password_input = request.form["password"]
     cursor = db.cursor()
-    cursor.execute("SELECT username, password FROM member WHERE username=%s AND password=%s", (username_input,password_input))
+    cursor.execute("SELECT name, username FROM member WHERE username=%s AND password=%s", (username_input,password_input))
     result = cursor.fetchone()
     if result == None:
         return redirect ("/error?message=帳號或密碼輸入錯誤")
     else:
+        session["name"] = result[0]
         session["username_input"] = username_input
         return redirect("/member")
         
@@ -78,3 +78,4 @@ def signout():
 
 
 app.run(port=3000)
+
