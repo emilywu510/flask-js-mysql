@@ -24,7 +24,7 @@ def home():
 @app.route("/member")
 def success():
     if "username_input" in session:
-        return render_template("success.html", name=session["name"])
+        return render_template("success.html", name=session["name_input"])
     else:
         return redirect("/")
 
@@ -51,6 +51,7 @@ def register():
     elif name_input =="" or username_input == "" or password_input== "":
         return redirect("/error?message=請輸入姓名、帳號、密碼")
     else:
+        session["name_input"] = name_input
         cursor.execute("INSERT INTO member (name, username, password) VALUES (%s,%s,%s)", (name_input, username_input, password_input))
         db.commit()
         return redirect ("/")
@@ -66,7 +67,6 @@ def signin():
     if result == None:
         return redirect ("/error?message=帳號或密碼輸入錯誤")
     else:
-        session["name"] = result[0]
         session["username_input"] = username_input
         return redirect("/member")
         
