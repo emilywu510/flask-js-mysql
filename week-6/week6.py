@@ -51,7 +51,6 @@ def register():
     elif name_input =="" or username_input == "" or password_input== "":
         return redirect("/error?message=請輸入姓名、帳號、密碼")
     else:
-        session["name_input"] = name_input
         cursor.execute("INSERT INTO member (name, username, password) VALUES (%s,%s,%s)", (name_input, username_input, password_input))
         db.commit()
         return redirect ("/")
